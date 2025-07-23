@@ -13,6 +13,33 @@ from data_sources.models import DataSource, CSVUpload
 import json
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.db import models
+
+
+def dashboard_public(request):
+    """Public dashboard view (no login required)."""
+    # Get current time and calculate time ranges
+    now = timezone.now()
+    last_24h = now - timedelta(hours=24)
+    last_7d = now - timedelta(days=7)
+    last_30d = now - timedelta(days=30)
+    
+    # Get dashboard statistics
+    context = {
+        'total_services': Service.objects.filter(is_active=True).count(),
+        'active_incidents': SLAIncident.objects.filter(status__in=['open', 'investigating']).count(),
+        'total_incidents': SLAIncident.objects.filter(started_at__gte=last_30d).count(),
+        'avg_availability': SLAMetric.objects.filter(
+            metric_type='availability',
+            timestamp__gte=last_24h
+        ).aggregate(avg=models.Avg('value'))['avg'] or 99.0,
+        'avg_response_time': SLAMetric.objects.filter(
+            metric_type='response_time',
+            timestamp__gte=last_24h
+        ).aggregate(avg=models.Avg('value'))['avg'] or 200,
+    }
+    
+    return render(request, 'dashboard/index.html', context)
 
 
 class DashboardView(TemplateView):

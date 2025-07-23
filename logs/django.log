@@ -60,3 +60,80 @@ Not Found: /
 "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
 "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
 "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /dashboard/
+"GET /dashboard/ HTTP/1.1" 404 3015
+Not Found: /dashboard/
+"GET /dashboard/ HTTP/1.1" 404 3015
+Not Found: /api/v1/dashboard/
+"GET /api/v1/dashboard/ HTTP/1.1" 404 2876
+Not Found: /dashboard/
+"GET /dashboard/ HTTP/1.1" 404 3015
+"GET /admin/ HTTP/1.1" 302 0
+"GET /admin/ HTTP/1.1" 200 13757
+"GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+"GET /static/admin/css/base.css HTTP/1.1" 304 0
+"GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+"GET /static/admin/js/theme.js HTTP/1.1" 304 0
+"GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+"GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+"GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+"GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+"GET /admin/ HTTP/1.1" 200 13757
+Not Found: /
+"GET / HTTP/1.1" 404 2967
+Not Found: /dashboard/
+"GET /dashboard/ HTTP/1.1" 404 3015
+"GET /admin/ HTTP/1.1" 302 0
+Not Found: /dashboard/
+"GET /dashboard/ HTTP/1.1" 404 3015
+Not Found: /dashboard/
+"GET /dashboard/ HTTP/1.1" 404 3015
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/michaelboiman/Developer/django-sla/dashboard/views.py", line 42, in dashboard_public
+    return render(request, 'dashboard/index.html', context)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/index.html
+"GET /dashboard/ HTTP/1.1" 500 81480
+Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/michaelboiman/Developer/django-sla/dashboard/views.py", line 42, in dashboard_public
+    return render(request, 'dashboard/index.html', context)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/michaelboiman/Developer/django-sla/venv/lib/python3.13/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/index.html
+"GET /dashboard/ HTTP/1.1" 500 81484
+/Users/michaelboiman/Developer/django-sla/sla_dashboard/settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /dashboard/ HTTP/1.1" 200 21889
+"GET /admin/ HTTP/1.1" 302 0
+"GET /admin/ HTTP/1.1" 302 0
+"GET /api/v1/sla/services/ HTTP/1.1" 200 2803
+"GET /dashboard/ HTTP/1.1" 200 21889
+Not Found: /api/services/
+"GET /api/services/ HTTP/1.1" 404 3177
+Not Found: /api/services/
+"GET /api/services/ HTTP/1.1" 404 3177
+Not Found: /api/services/
+"GET /api/services/ HTTP/1.1" 404 3177

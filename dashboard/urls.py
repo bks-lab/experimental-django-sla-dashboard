@@ -7,11 +7,12 @@ from . import views
 
 app_name = 'dashboard'
 
-app_name = 'dashboard'
-
 urlpatterns = [
-    # Main dashboard view
-    path('', views.DashboardView.as_view(), name='index'),
+    # Public dashboard view (no login required)
+    path('', views.dashboard_public, name='index'),
+    
+    # Private dashboard view (requires login)
+    path('private/', views.DashboardView.as_view(), name='private'),
     
     # API endpoints for dashboard data
     path('api/stats/', views.dashboard_stats, name='dashboard_stats'),

@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/v1/data-sources/', include('data_sources.urls')),
     path('api/v1/alerts/', include('alerts.urls')),
     path('api/v1/dashboard/', include('dashboard.urls')),
+    path('dashboard/', include('dashboard.urls')),  # Direct dashboard access
 ]
 
 # Serve media files in development
