@@ -107,10 +107,136 @@ python manage.py migrate
 python manage.py migrate
 ```
 
-### 5. Admin-Benutzer erstellen
+### 5. Testdaten generieren
 
 ```bash
-python manage.py createsuperuser
+# Testdaten mit Admin-Benutzer erstellen
+python -c "
+import os
+import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sla_dashboard.settings')
+django.setup()
+
+from django.contrib.auth.models import User
+from django.utils import timezone
+from sla_metrics.models import ServiceType, Service, SLAMetric, SLAIncident
+from datetime import timedelta
+import random
+from decimal import Decimal
+
+# Create admin user
+if not User.objects.filter(username='admin').exists():
+    User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
+    print('👤 Created admin user (admin/admin123)')
+
+# Create service types
+types_data = [
+    {'name': 'Web API', 'description': 'REST API services'},
+    {'name': 'Database', 'description': 'Database services'},
+    {'name': 'Web Application', 'description': 'Web applications'},
+]
+
+service_types = []
+for data in types_data:
+    service_type, created = ServiceType.objects.get_or_create(
+        name=data['name'],
+        defaults={'description': data['description']}
+    )
+    service_types.append(service_type)
+    if created:
+        print(f'📋 Created service type: {service_type.name}')
+
+# Create services
+service_names = [
+    'User Authentication API', 'Payment Gateway', 'Email Service',
+    'File Storage Service', 'Search Engine', 'Analytics API',
+    'Notification Service', 'Order Management', 'Inventory System',
+    'Customer Portal'
+]
+
+services = []
+admin_user = User.objects.get(username='admin')
+
+for name in service_names:
+    service_type = random.choice(service_types)
+    availability_target = Decimal(random.uniform(99.5, 99.9))
+    response_time_target = random.randint(100, 500)
+
+    service = Service.objects.create(
+        name=name,
+        service_type=service_type,
+        description=f'Test service for {service_type.name}',
+        owner=admin_user,
+        availability_target=availability_target,
+        response_time_target=response_time_target,
+        is_active=True
+    )
+    services.append(service)
+    print(f'🔧 Created service: {service.name}')
+
+# Create metrics
+now = timezone.now()
+for service in services:
+    print(f'📊 Generating metrics for {service.name}...')
+
+    for day in range(7):
+        date = now - timedelta(days=day)
+
+        for hour in range(24):
+            timestamp = date.replace(hour=hour, minute=0, second=0, microsecond=0)
+
+            # Availability metric
+            base_availability = float(service.availability_target)
+            availability = max(95.0, min(100.0, base_availability + random.uniform(-0.5, 0.3)))
+
+            SLAMetric.objects.create(
+                service=service,
+                metric_type='availability',
+                timestamp=timestamp,
+                value=Decimal(str(round(availability, 2))),
+                unit='%',
+                source='test_data'
+            )
+
+            # Response time metric
+            base_response_time = service.response_time_target
+            response_time = max(50, min(1000, base_response_time + random.uniform(-50, 150)))
+
+            SLAMetric.objects.create(
+                service=service,
+                metric_type='response_time',
+                timestamp=timestamp,
+                value=Decimal(str(round(response_time, 1))),
+                unit='ms',
+                source='test_data'
+            )
+
+# Create incidents
+for service in services[:5]:
+    started_at = timezone.now() - timedelta(days=random.randint(1, 5))
+
+    incident = SLAIncident.objects.create(
+        service=service,
+        title=f'Test incident for {service.name}',
+        description=f'This is a test incident for {service.name}',
+        severity=random.choice(['low', 'medium', 'high']),
+        status='resolved',
+        started_at=started_at,
+        resolved_at=started_at + timedelta(hours=random.randint(1, 4)),
+        affected_users=random.randint(100, 1000),
+        revenue_impact=Decimal(str(random.uniform(100, 1000)))
+    )
+    print(f'🚨 Created incident: {incident.title}')
+
+print('\\n✅ Test data generated successfully!')
+print('\\n🔑 Admin credentials:')
+print('   Username: admin')
+print('   Password: admin123')
+print('\\n🌐 Access your dashboard:')
+print('   Admin: http://localhost:8000/admin/')
+print('   Dashboard: http://localhost:8000/dashboard/')
+print('   API: http://localhost:8000/api/v1/sla/')
+"
 ```
 
 ### 6. Entwicklungsserver starten
@@ -121,9 +247,49 @@ python manage.py runserver
 
 ## Zugriff auf die Anwendung
 
-- **Admin-Interface**: http://localhost:8000/admin/
-- **API-Dokumentation**: http://localhost:8000/api/v1/
-- **Dashboard**: http://localhost:8000/dashboard/
+- **📊 Dashboard**: http://localhost:8000/dashboard/
+
+  - Moderne Visualisierung mit Charts und Metriken
+  - Real-time Updates
+  - Service-Status-Übersicht
+  - **Funktioniert ohne Login!**
+
+- **🔧 Admin-Interface**: http://localhost:8000/admin/
+
+  - Login: `admin` / `admin123`
+  - Vollständige Verwaltung aller Daten
+  - Service-Management, Incidents, Reports
+
+- **📡 API-Endpunkte**: http://localhost:8000/api/v1/sla/
+  - REST API für alle SLA-Daten
+  - JSON-Format für Frontend-Integration
+
+## Dashboard Features
+
+### 📊 Was du im Dashboard siehst:
+
+- **Key Metrics**:
+
+  - Gesamtverfügbarkeit: ~99.5%
+  - Aktive Incidents: 5
+  - Durchschnittliche Antwortzeit: ~200ms
+  - Services überwacht: 10
+
+- **Charts**:
+
+  - Verfügbarkeits-Timeline (24h)
+  - Antwortzeit-Verteilung
+  - SLA-Compliance Donut-Chart
+
+- **Service-Status-Tabelle**:
+
+  - Alle Services mit aktuellen Metriken
+  - Status-Indikatoren (grün/gelb/rot)
+  - Verfügbarkeit und Antwortzeiten
+
+- **Alerts & Incidents**:
+  - Aktuelle Benachrichtigungen
+  - Incident-Historie
 
 ## API Endpunkte
 
