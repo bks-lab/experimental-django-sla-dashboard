@@ -1,261 +1,273 @@
-# Django SLA Dashboard
+# Experimental Django SLA Dashboard
 
-A comprehensive SLA (Service Level Agreement) monitoring and dashboard system built with Django and Django REST Framework.
+⚠️ **EXPERIMENTELLES PROJEKT** - Dies ist ein experimentelles Django SLA Dashboard System für Service Level Agreement Monitoring und Dashboarding.
+
+## Über das Projekt
+
+Ein umfassendes SLA (Service Level Agreement) Monitoring und Dashboard System, entwickelt mit Django und Django REST Framework. Das Projekt befindet sich in der experimentellen Phase und dient der Erforschung und Entwicklung von SLA-Monitoring-Lösungen.
 
 ## Features
 
-### Core Functionality
-- **Service Management**: Track multiple services with configurable SLA targets
-- **Metric Collection**: Store and analyze availability, response time, throughput, and error rate metrics
-- **Incident Tracking**: Monitor and manage SLA breaches and service incidents
-- **Data Import**: CSV upload functionality with field mapping and validation
-- **Alert System**: Configurable alert rules with notification channels
-- **Dashboard**: Customizable dashboards with widgets and user preferences
-- **Reports**: Automated SLA report generation
+### Kernfunktionalität
 
-### Technical Features
-- Django 5.2.4 with modern architecture
-- REST API with Django REST Framework
-- Multi-database routing support (PostgreSQL/MySQL)
-- CSV processing with pandas
-- Comprehensive admin interface
-- UUID primary keys for security
-- Filtering, search, and pagination
-- User authentication and permissions
+- **Service Management**: Verfolgung mehrerer Services mit konfigurierbaren SLA-Zielen
+- **Metrik-Sammlung**: Speicherung und Analyse von Verfügbarkeit, Antwortzeit, Durchsatz und Fehlerrate
+- **Incident Tracking**: Überwachung und Verwaltung von SLA-Verstößen und Service-Incidents
+- **Datenimport**: CSV-Upload-Funktionalität mit Feldzuordnung und Validierung
+- **Alert-System**: Konfigurierbare Alert-Regeln mit Benachrichtigungskanälen
+- **Dashboard**: Anpassbare Dashboards mit Widgets und Benutzereinstellungen
+- **Reports**: Automatisierte SLA-Report-Generierung
 
-## Project Structure
+### Technische Features
+
+- Django 5.2.4 mit moderner Architektur
+- REST API mit Django REST Framework
+- Multi-Database-Routing-Support (PostgreSQL/MySQL)
+- CSV-Verarbeitung mit pandas
+- Umfassende Admin-Oberfläche
+- UUID-Primärschlüssel für Sicherheit
+- Filterung, Suche und Paginierung
+- Benutzerauthentifizierung und Berechtigungen
+
+## Projektstruktur
 
 ```
 django-sla/
-├── sla_dashboard/          # Main Django project
-├── sla_metrics/           # Core SLA metrics models and API
-├── data_sources/          # Data import and CSV processing
-├── alerts/               # Alert rules and notifications
-├── dashboard/            # Dashboard widgets and user preferences
-├── media/               # Uploaded files (CSV, etc.)
-├── static/              # Static files
-└── logs/                # Application logs
+├── sla_dashboard/          # Haupt-Django-Projekt
+├── sla_metrics/           # Core SLA Metriken Modelle und API
+├── data_sources/          # Datenimport und CSV-Verarbeitung
+├── alerts/               # Alert-Regeln und Benachrichtigungen
+├── dashboard/            # Dashboard-Widgets und Benutzereinstellungen
+├── media/               # Hochgeladene Dateien (CSV, etc.)
+├── static/              # Statische Dateien
+└── logs/                # Anwendungslogs
 ```
 
-## Models Overview
+## Experimenteller Status
 
-### SLA Metrics App
-- **ServiceType**: Categories for services (API, Web, Database, etc.)
-- **Service**: Individual services with SLA targets
-- **SLAMetric**: Time-series metric data (availability, response time, etc.)
-- **SLAIncident**: Track SLA violations and incidents
-- **SLAReport**: Generated periodic SLA reports
+### ⚠️ Wichtige Hinweise
 
-### Data Sources App
-- **DataSource**: External data connections (CSV, API, Database)
-- **DataSourceMapping**: Field mappings for data transformation
-- **CSVUpload**: Track CSV file uploads and processing
-- **DataImportLog**: Audit log for data imports
-- **ExternalDataConnection**: Database connection management
+- **Nicht für Produktion geeignet**: Dies ist ein experimentelles Projekt
+- **Entwicklungsphase**: Das Projekt befindet sich in aktiver Entwicklung
+- **Tests erforderlich**: Weitere Tests und Validierungen sind geplant
+- **Performance-Optimierungen**: Weitere Optimierungen sind in Planung
 
-### Alerts App
-- **AlertRule**: Configurable alert conditions
-- **Alert**: Individual alert instances
-- **NotificationChannel**: Email, Slack, webhook notifications
-- **AlertRuleNotification**: Link rules to notification channels
-- **NotificationLog**: Track sent notifications
-- **AlertEscalation**: Escalation rules for unacknowledged alerts
+### Bekannte Einschränkungen
 
-### Dashboard App
-- **Dashboard**: Custom dashboard configurations
-- **DashboardWidget**: Individual dashboard components
-- **UserPreferences**: User-specific settings
-- **SavedFilter**: Reusable filter configurations
-- **ReportTemplate**: Automated report templates
-
-## API Endpoints
-
-### SLA Metrics API (`/api/v1/sla/`)
-- `GET/POST /service-types/` - List/create service types
-- `GET/PUT/DELETE /service-types/{id}/` - Service type details
-- `GET/POST /services/` - List/create services
-- `GET/PUT/DELETE /services/{id}/` - Service details
-- `GET/POST /metrics/` - List/create SLA metrics
-- `GET/PUT/DELETE /metrics/{id}/` - Metric details
-- `GET/POST /incidents/` - List/create incidents
-- `GET/PUT/DELETE /incidents/{id}/` - Incident details
-- `GET/POST /reports/` - List/create reports
-- `GET/PUT/DELETE /reports/{id}/` - Report details
-- `GET /dashboard/stats/` - Dashboard statistics
-- `GET /services/{id}/metrics/chart/` - Chart data
-- `GET /services/{id}/availability/` - Availability summary
-
-### Data Sources API (`/api/v1/data-sources/`)
-- `POST /csv/upload/` - Upload CSV file
-- `GET /csv/status/{id}/` - Upload status
-- `POST /csv/process/{id}/` - Process uploaded CSV
-- `GET /csv/history/` - Upload history
-- `GET/POST /sources/` - List/create data sources
-- `GET/PUT/DELETE /sources/{id}/` - Data source details
-- `GET/POST /mappings/` - List/create field mappings
-- `GET/PUT/DELETE /mappings/{id}/` - Mapping details
-- `GET /import-logs/` - Import audit logs
+- Grundlegende Funktionalität implementiert
+- Weitere Tests erforderlich
+- Performance-Optimierungen geplant
+- Frontend-Integration in Entwicklung
 
 ## Installation & Setup
 
-### 1. Environment Setup
-```bash
-# Clone the repository
-cd django-sla
+### Voraussetzungen
 
-# Create virtual environment
+- Python 3.8+
+- pip oder uv (empfohlen)
+
+### 1. Repository klonen
+
+```bash
+git clone https://github.com/bks-lab/experimental-django-sla-dashboard.git
+cd experimental-django-sla-dashboard
+```
+
+### 2. Virtuelle Umgebung erstellen
+
+```bash
+# Mit uv (empfohlen)
+uv venv
+source .venv/bin/activate
+
+# Oder mit venv
 python3 -m venv venv
 source venv/bin/activate
+```
 
-# Install dependencies
+### 3. Abhängigkeiten installieren
+
+```bash
+# Mit uv
+uv pip install -r requirements.txt
+
+# Oder mit pip
 pip install -r requirements.txt
 ```
 
-### 2. Database Configuration
+### 4. Datenbank konfigurieren
+
 ```bash
-# For SQLite (development)
+# Für SQLite (Entwicklung)
 python manage.py migrate
 
-# For PostgreSQL (production)
-# Update settings.py database configuration
-# Create database and run migrations
+# Für PostgreSQL (Produktion)
+# settings.py Datenbank-Konfiguration aktualisieren
+# Datenbank erstellen und Migrationen ausführen
 python manage.py migrate
 ```
 
-### 3. Create Admin User
+### 5. Admin-Benutzer erstellen
+
 ```bash
 python manage.py createsuperuser
 ```
 
-### 4. Run Development Server
+### 6. Entwicklungsserver starten
+
 ```bash
 python manage.py runserver
 ```
 
-Access the application:
-- Admin Interface: http://localhost:8000/admin/
-- API Documentation: http://localhost:8000/api/v1/
+## Zugriff auf die Anwendung
+
+- **Admin-Interface**: http://localhost:8000/admin/
+- **API-Dokumentation**: http://localhost:8000/api/v1/
+- **Dashboard**: http://localhost:8000/dashboard/
+
+## API Endpunkte
+
+### SLA Metrics API (`/api/v1/sla/`)
+
+- `GET/POST /service-types/` - Service-Typen auflisten/erstellen
+- `GET/PUT/DELETE /service-types/{id}/` - Service-Typ Details
+- `GET/POST /services/` - Services auflisten/erstellen
+- `GET/PUT/DELETE /services/{id}/` - Service Details
+- `GET/POST /metrics/` - Metriken auflisten/erstellen
+- `GET/PUT/DELETE /metrics/{id}/` - Metrik Details
+- `GET/POST /incidents/` - Incidents auflisten/erstellen
+- `GET/PUT/DELETE /incidents/{id}/` - Incident Details
+- `GET/POST /reports/` - Reports auflisten/erstellen
+- `GET/PUT/DELETE /reports/{id}/` - Report Details
+
+### Data Sources API (`/api/v1/data-sources/`)
+
+- `POST /csv/upload/` - CSV-Datei hochladen
+- `GET /csv/status/{id}/` - Upload-Status
+- `POST /csv/process/{id}/` - Hochgeladene CSV verarbeiten
+- `GET /csv/history/` - Upload-Historie
 
 ## CSV Upload Format
 
-The system supports CSV uploads with the following fields:
+### Erforderliche Felder
 
-### Required Fields
-- `service_name` or `service` - Name of the service
-- Metric fields (at least one):
-  - `availability` - Availability percentage
-  - `response_time` - Response time in milliseconds
-  - `throughput` - Requests per second
-  - `error_rate` - Error percentage
+- `service_name` oder `service` - Name des Services
+- Metrik-Felder (mindestens eines):
+  - `availability` - Verfügbarkeit in Prozent
+  - `response_time` - Antwortzeit in Millisekunden
+  - `throughput` - Requests pro Sekunde
+  - `error_rate` - Fehlerrate in Prozent
 
-### Optional Fields
-- `timestamp` - When the metric was recorded
-- `uptime_seconds` - Total uptime in seconds
-- `downtime_seconds` - Total downtime in seconds
-- `total_requests` - Total number of requests
-- `failed_requests` - Number of failed requests
-- `unit` - Unit of measurement
-- `notes` - Additional notes
+### Optionale Felder
 
-### Example CSV
+- `timestamp` - Wann die Metrik aufgezeichnet wurde
+- `uptime_seconds` - Gesamte Uptime in Sekunden
+- `downtime_seconds` - Gesamte Downtime in Sekunden
+- `total_requests` - Gesamtzahl der Requests
+- `failed_requests` - Anzahl fehlgeschlagener Requests
+- `unit` - Einheit der Messung
+- `notes` - Zusätzliche Notizen
+
+### Beispiel CSV
+
 ```csv
 service_name,timestamp,availability,response_time,uptime_seconds,total_requests,failed_requests
 Web API,2024-01-01 12:00:00,99.9,150,3590,1000,1
 Database,2024-01-01 12:00:00,99.8,50,3588,500,1
 ```
 
-## Configuration
+## Entwicklung
 
-### Environment Variables (.env)
-```
-SECRET_KEY=your-secret-key
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-DB_NAME=sla_dashboard
-DB_USER=sla_user
-DB_PASSWORD=sla_password
-DB_HOST=localhost
-DB_PORT=5432
-```
+### Hinzufügen neuer Metriken
 
-### Key Settings
-- `DATABASES`: Database configuration with routing support
-- `REST_FRAMEWORK`: API pagination and authentication
-- `CORS_ALLOWED_ORIGINS`: Frontend CORS configuration
-- `MEDIA_ROOT`: File upload directory
-- `LOGGING`: Application logging configuration
+1. Datenquelle in Admin-Interface erstellen
+2. Feldzuordnungen für CSV-Spalten konfigurieren
+3. CSV-Datei über API oder Admin hochladen
+4. Hochgeladene Daten verarbeiten
 
-## Development
+### Modell-Erweiterungen
 
-### Adding New Metrics
-1. Create data source in admin interface
-2. Configure field mappings for CSV columns
-3. Upload CSV file via API or admin
-4. Process uploaded data
+- Alle Modelle verwenden UUID-Primärschlüssel für Sicherheit
+- Modelle enthalten created/updated Timestamps
+- Beziehungen verwenden proper related_name Attribute
+- Indizes sind für Performance konfiguriert
 
-### Extending Models
-- All models use UUID primary keys for security
-- Models include created/updated timestamps
-- Relationships use proper related_name attributes
-- Indexes are configured for performance
+### API-Entwicklung
 
-### API Development
-- Uses Django REST Framework with ViewSets
-- Includes filtering, search, and ordering
-- Comprehensive serializers for all models
-- Proper error handling and validation
+- Verwendet Django REST Framework mit ViewSets
+- Enthält Filterung, Suche und Sortierung
+- Umfassende Serializer für alle Modelle
+- Proper Error Handling und Validierung
 
-## Next Steps
+## Nächste Schritte
 
-### For Production Deployment
-1. Set up PostgreSQL database
-2. Configure environment variables
-3. Set up Redis for caching
-4. Configure Celery for background tasks
-5. Set up monitoring and logging
-6. Configure email/Slack notifications
-7. Set up automated backups
+### Für Produktions-Deployment
 
-### Frontend Development
-1. Create React/Vue.js frontend
-2. Implement dashboard visualizations
-3. Add real-time updates with WebSockets
-4. Create mobile-responsive interface
+1. PostgreSQL-Datenbank einrichten
+2. Umgebungsvariablen konfigurieren
+3. Redis für Caching einrichten
+4. Celery für Background-Tasks konfigurieren
+5. Monitoring und Logging einrichten
+6. Email/Slack-Benachrichtigungen konfigurieren
+7. Automatisierte Backups einrichten
 
-### Additional Features
-1. Real-time metric collection
-2. Advanced alerting with ML
-3. Multi-tenant support
-4. API rate limiting
-5. Advanced reporting with charts
-6. Integration with monitoring tools
+### Frontend-Entwicklung
 
-## License
+1. React/Vue.js Frontend erstellen
+2. Dashboard-Visualisierungen implementieren
+3. Real-time Updates mit WebSockets hinzufügen
+4. Mobile-responsive Interface erstellen
 
-This project is built for educational and development purposes.
+### Zusätzliche Features
 
-## Architecture Decisions
+1. Real-time Metrik-Sammlung
+2. Erweiterte Alerting mit ML
+3. Multi-Tenant Support
+4. API Rate Limiting
+5. Erweiterte Reporting mit Charts
+6. Integration mit Monitoring-Tools
 
-### Database Design
-- UUID primary keys for security and distribution
-- Proper foreign key relationships with cascade options
-- Indexes on frequently queried fields
-- Database routing for multi-source support
+## Architektur-Entscheidungen
 
-### API Design
-- RESTful endpoints following Django conventions
-- Comprehensive filtering and search capabilities
-- Proper HTTP status codes and error handling
-- Pagination for large datasets
+### Datenbank-Design
 
-### Security Considerations
-- Environment-based configuration
-- Password fields marked as write-only
-- Proper user authentication integration
-- CORS configuration for frontend access
+- UUID-Primärschlüssel für Sicherheit und Verteilung
+- Ordnungsgemäße Fremdschlüssel-Beziehungen mit Cascade-Optionen
+- Indizes auf häufig abgefragten Feldern
+- Datenbank-Routing für Multi-Source-Support
 
-### Performance Optimizations
-- Database query optimization with select_related
-- Proper indexing on models
-- Pagination to handle large datasets
-- File upload size limits and validation
+### API-Design
+
+- RESTful-Endpunkte nach Django-Konventionen
+- Umfassende Filterung und Suchfunktionen
+- Ordnungsgemäße HTTP-Statuscodes und Fehlerbehandlung
+- Paginierung für große Datensätze
+
+### Sicherheitsüberlegungen
+
+- Umgebungsbasierte Konfiguration
+- Passwort-Felder als write-only markiert
+- Ordnungsgemäße Benutzerauthentifizierung integriert
+- CORS-Konfiguration für Frontend-Zugriff
+
+### Performance-Optimierungen
+
+- Datenbankabfrage-Optimierung mit select_related
+- Ordnungsgemäße Indizierung auf Modellen
+- Paginierung zur Handhabung großer Datensätze
+- Datei-Upload-Größenlimits und Validierung
+
+## Lizenz
+
+Dieses Projekt ist für Bildungs- und Entwicklungszwecke erstellt.
+
+## Kontakt
+
+**Boiman Kupermann Solutions GmbH**
+
+- Email: info@boiman-kupermann.com
+- Website: https://boiman-kupermann.com
+
+---
+
+**⚠️ Hinweis**: Dies ist ein experimentelles Projekt der bks-lab Organisation. Für Produktionsanwendungen wird eine vollständige Validierung und Tests empfohlen.
