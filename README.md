@@ -6,6 +6,12 @@
 
 Ein umfassendes SLA (Service Level Agreement) Monitoring und Dashboard System, entwickelt mit Django und Django REST Framework. Das Projekt befindet sich in der experimentellen Phase und dient der Erforschung und Entwicklung von SLA-Monitoring-Lösungen.
 
+## 📊 Dashboard Vorschau
+
+![SLA Dashboard](django-sla-dashboard.jpg)
+
+_Das SLA Dashboard zeigt eine moderne, professionelle Oberfläche mit Key Metrics, Verfügbarkeits-Timeline, Antwortzeit-Verteilung und SLA-Compliance-Charts._
+
 ## Features
 
 ### Kernfunktionalität
