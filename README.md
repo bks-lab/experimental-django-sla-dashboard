@@ -464,10 +464,10 @@ Dieses Projekt ist für Bildungs- und Entwicklungszwecke erstellt.
 
 ## Kontakt
 
-**Boiman Kupermann Solutions GmbH**
+**BKS Lab GmbH**
 
-- Email: info@boiman-kupermann.com
-- Website: https://boiman-kupermann.com
+- Email: info@bks-lab.com
+- Website: https://bks-lab.com
 
 ---
 
